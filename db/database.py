@@ -5,14 +5,19 @@ from sqlalchemy.orm import sessionmaker
 
 DATABASE_URL = "sqlite:///./blog_app_gea6.db"
 
+# Create Engine => Database
 engine = create_engine(
     DATABASE_URL,connect_args={"check_same_thread": False}
 )
 
+
+# Session =>  Python => Sqlite queries => Database
 SessionLocal = sessionmaker(autocommit=False,autoflush=False,bind=engine)
 
+# Base => To connect models
 Base = declarative_base()
 
+#Generator Function => Return session when called
 def get_db():
     db = SessionLocal()
     try:
